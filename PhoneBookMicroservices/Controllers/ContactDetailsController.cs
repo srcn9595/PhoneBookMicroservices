@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneBookMicroservices.Models;
+using PhoneBookMicroservices.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PhoneBookMicroservices.Controllers
 {
@@ -9,10 +14,12 @@ namespace PhoneBookMicroservices.Controllers
     public class ContactDetailsController : ControllerBase
     {
         private readonly ContactDirectoryContext _context;
+        private readonly IMessageQueueService _messageQueueService;
 
-        public ContactDetailsController(ContactDirectoryContext context)
+        public ContactDetailsController(ContactDirectoryContext context, IMessageQueueService messageQueueService)
         {
             _context = context;
+            _messageQueueService = messageQueueService;
         }
 
         // GET: api/contactdetails/{contactId}
@@ -42,6 +49,9 @@ namespace PhoneBookMicroservices.Controllers
 
             _context.ContactDetails.Add(contactDetail);
             await _context.SaveChangesAsync();
+
+            // Send a message to RabbitMQ
+            _messageQueueService.SendMessageToQueue("contactDetailsQueue", $"Contact detail created: {contactDetail.Id}");
 
             return CreatedAtAction(nameof(GetContactDetails), new { contactId = contactDetail.ContactId }, contactDetail);
         }
@@ -91,6 +101,9 @@ namespace PhoneBookMicroservices.Controllers
 
             _context.ContactDetails.Remove(contactDetail);
             await _context.SaveChangesAsync();
+
+            // Send a message to RabbitMQ
+            _messageQueueService.SendMessageToQueue("contactDetailsQueue", $"Contact detail deleted: {contactDetail.Id}");
 
             return NoContent();
         }
