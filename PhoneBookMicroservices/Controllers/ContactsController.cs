@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneBookMicroservices.Models;
+using PhoneBookMicroservices.Services;
+using System.Threading.Tasks;
 
 namespace PhoneBookMicroservices.Controllers
 {
@@ -9,11 +11,14 @@ namespace PhoneBookMicroservices.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IContactDirectoryContext _context;
+        private readonly IMessageQueueService _messageQueueService;
 
-        public ContactsController(IContactDirectoryContext context)
+        public ContactsController(IContactDirectoryContext context, IMessageQueueService messageQueueService)
         {
             _context = context;
+            _messageQueueService = messageQueueService;
         }
+
         // GET: api/contacts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
@@ -39,6 +44,8 @@ namespace PhoneBookMicroservices.Controllers
         {
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
+
+            _messageQueueService.SendMessageToQueue("ContactCreated", $"Contact with ID {contact.Id} has been created.");
 
             return CreatedAtAction(nameof(GetContact), new { id = contact.Id }, contact);
         }
@@ -69,9 +76,10 @@ namespace PhoneBookMicroservices.Controllers
                 }
             }
 
+            _messageQueueService.SendMessageToQueue("ContactUpdated", $"Contact with ID {contact.Id} has been updated.");
+
             return NoContent();
         }
-
 
         // DELETE: api/contacts/{id}
         [HttpDelete("{id}")]
@@ -86,12 +94,14 @@ namespace PhoneBookMicroservices.Controllers
             _context.Contacts.Remove(contact);
             await _context.SaveChangesAsync();
 
+            _messageQueueService.SendMessageToQueue("ContactDeleted", $"Contact with ID {contact.Id} has been deleted.");
+
             return NoContent();
         }
+
         private bool ContactExists(Guid id)
         {
             return _context.Contacts.Any(e => e.Id == id);
         }
-
     }
 }
