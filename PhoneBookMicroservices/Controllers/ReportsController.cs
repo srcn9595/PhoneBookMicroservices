@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneBookMicroservices.Models;
 using PhoneBookMicroservices.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneBookMicroservices.Controllers
@@ -10,10 +13,10 @@ namespace PhoneBookMicroservices.Controllers
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        private readonly IContactDirectoryContext _context;
+        private readonly ContactDirectoryContext _context;
         private readonly IMessageQueueService _messageQueueService;
 
-        public ReportsController(IContactDirectoryContext context, IMessageQueueService messageQueueService)
+        public ReportsController(ContactDirectoryContext context, IMessageQueueService messageQueueService)
         {
             _context = context;
             _messageQueueService = messageQueueService;
@@ -47,8 +50,6 @@ namespace PhoneBookMicroservices.Controllers
             _context.Reports.Add(report);
             await _context.SaveChangesAsync();
 
-            _messageQueueService.SendMessageToQueue("ReportCreated", $"Report with ID {report.Id} has been created.");
-
             return CreatedAtAction(nameof(GetReport), new { id = report.Id }, report);
         }
 
@@ -79,8 +80,6 @@ namespace PhoneBookMicroservices.Controllers
                 }
             }
 
-            _messageQueueService.SendMessageToQueue("ReportUpdated", $"Report with ID {report.Id} has been updated.");
-
             return NoContent();
         }
 
@@ -98,9 +97,30 @@ namespace PhoneBookMicroservices.Controllers
             _context.Reports.Remove(report);
             await _context.SaveChangesAsync();
 
-            _messageQueueService.SendMessageToQueue("ReportDeleted", $"Report with ID {report.Id} has been deleted.");
-
             return NoContent();
+        }
+
+        // POST: api/reports/request
+        [HttpPost("request")]
+        public ActionResult<Guid> RequestReport()
+        {
+            var reportId = Guid.NewGuid();
+
+            // Create a new report with status "Processing"
+            var report = new Report
+            {
+                Id = reportId,
+                RequestedAt = DateTime.UtcNow,
+                Status = ReportStatus.Preparing
+            };
+            _context.Reports.Add(report);
+            _context.SaveChanges();
+
+            // Send a message to the queue with the report id
+            _messageQueueService.SendMessageToQueue("reportRequests", reportId.ToString());
+
+            // Return the report id
+            return reportId;
         }
 
         private bool ReportExists(Guid id)

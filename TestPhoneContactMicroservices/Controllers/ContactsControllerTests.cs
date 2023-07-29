@@ -5,6 +5,7 @@ using PhoneBookMicroservices.Controllers;
 using PhoneBookMicroservices.Models;
 using PhoneBookMicroservices;
 using System.Collections.Generic;
+using PhoneBookMicroservices.Services;
 
 public class ContactsControllerTests
 {
@@ -13,6 +14,8 @@ public class ContactsControllerTests
     {
         // Arrange
         var mockContext = new Mock<IContactDirectoryContext>();
+        var mockMessageQueueService = new Mock<IMessageQueueService>(); // Add this line
+
         var expectedContacts = new List<Contact>
         {
             new Contact { Id = Guid.NewGuid(), Name = "Test1", Surname = "Test1", Company = "Test1" },
@@ -29,13 +32,9 @@ public class ContactsControllerTests
         mockSet.As<IAsyncEnumerable<Contact>>().Setup(m => m.GetAsyncEnumerator(new CancellationToken()))
          .Returns(new TestAsyncEnumerator<Contact>(expectedContacts.GetEnumerator()));
 
-
-
-
-
         mockContext.Setup(ctx => ctx.Contacts).Returns(mockSet.Object);
 
-        var controller = new ContactsController(mockContext.Object);
+        var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object); // Update this line
 
         // Act
         var result = await controller.GetContacts();
