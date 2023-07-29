@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneBookMicroservices.Models;
+using PhoneBookMicroservices.Services;
+using System.Threading.Tasks;
 
 namespace PhoneBookMicroservices.Controllers
 {
@@ -8,11 +10,13 @@ namespace PhoneBookMicroservices.Controllers
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        private readonly ContactDirectoryContext _context;
+        private readonly IContactDirectoryContext _context;
+        private readonly IMessageQueueService _messageQueueService;
 
-        public ReportsController(ContactDirectoryContext context)
+        public ReportsController(IContactDirectoryContext context, IMessageQueueService messageQueueService)
         {
             _context = context;
+            _messageQueueService = messageQueueService;
         }
 
         // GET: api/reports
@@ -42,6 +46,8 @@ namespace PhoneBookMicroservices.Controllers
         {
             _context.Reports.Add(report);
             await _context.SaveChangesAsync();
+
+            _messageQueueService.SendMessageToQueue("ReportCreated", $"Report with ID {report.Id} has been created.");
 
             return CreatedAtAction(nameof(GetReport), new { id = report.Id }, report);
         }
@@ -73,6 +79,8 @@ namespace PhoneBookMicroservices.Controllers
                 }
             }
 
+            _messageQueueService.SendMessageToQueue("ReportUpdated", $"Report with ID {report.Id} has been updated.");
+
             return NoContent();
         }
 
@@ -89,6 +97,8 @@ namespace PhoneBookMicroservices.Controllers
 
             _context.Reports.Remove(report);
             await _context.SaveChangesAsync();
+
+            _messageQueueService.SendMessageToQueue("ReportDeleted", $"Report with ID {report.Id} has been deleted.");
 
             return NoContent();
         }
