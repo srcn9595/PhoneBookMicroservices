@@ -8,9 +8,9 @@ namespace PhoneBookMicroservices.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly ContactDirectoryContext _context;
+        private readonly IContactDirectoryContext _context;
 
-        public ContactsController(ContactDirectoryContext context)
+        public ContactsController(IContactDirectoryContext context)
         {
             _context = context;
         }
@@ -52,7 +52,7 @@ namespace PhoneBookMicroservices.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(contact).State = EntityState.Modified;
+            _context.Update(contact);
             try
             {
                 await _context.SaveChangesAsync();
@@ -71,6 +71,7 @@ namespace PhoneBookMicroservices.Controllers
 
             return NoContent();
         }
+
 
         // DELETE: api/contacts/{id}
         [HttpDelete("{id}")]
