@@ -52,7 +52,7 @@ Projeyi çalıştırmadan önce, Postgre SQL veritabanınızı kurduğunuzdan em
 ```
 Veritabanınızı oluşturmak için migration işlemini gerçekleştirmeyi unutmayın. Aşağıdaki komutları proje dizininde çalıştırarak migration işlemini yapabilirsiniz:
 
-dotnet ef migrations add InitialMigration
-dotnet ef database update
+  dotnet ef migrations add InitialMigration
+  dotnet ef database update
 
 
