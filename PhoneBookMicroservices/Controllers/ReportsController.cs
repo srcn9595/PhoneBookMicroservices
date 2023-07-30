@@ -57,6 +57,12 @@ namespace PhoneBookMicroservices.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateReport(Guid id, Report report)
         {
+            var existingReport = await _context.Reports.FindAsync(id);
+            if (existingReport == null)
+            {
+                return NotFound(); // Return NotFoundResult if the report does not exist
+            }
+
             if (id != report.Id)
             {
                 return BadRequest();
@@ -82,6 +88,7 @@ namespace PhoneBookMicroservices.Controllers
 
             return NoContent();
         }
+
 
         // DELETE: api/reports/{id}
         [HttpDelete("{id}")]

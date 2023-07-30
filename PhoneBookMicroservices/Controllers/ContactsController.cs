@@ -131,7 +131,7 @@ namespace PhoneBookMicroservices.Controllers
             return NoContent();
         }
 
-        private bool ContactExists(Guid id)
+        public bool ContactExists(Guid id)
         {
             return _context.Contacts.Any(e => e.Id == id);
         }
