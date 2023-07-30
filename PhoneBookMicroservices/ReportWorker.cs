@@ -54,9 +54,33 @@ namespace PhoneBookMicroservices
             }
         }
 
-        private void ProcessReport(Guid reportId)
+       private void ProcessReport(Guid reportId)
         {
-            Thread.Sleep(5000);
+             using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                 var context = scope.ServiceProvider.GetRequiredService<ContactDirectoryContext>();
+
+                  // Get the report
+                 var report = context.Reports.Find(reportId);
+
+               
+                  var location = report.Location;
+
+ 
+                  var contactCount = context.ContactDetails.Count(cd => cd.InfoType == InfoType.Location && cd.InfoContent == location);
+
+
+                  var phoneNumberCount = context.ContactDetails.Count(cd => cd.InfoType == InfoType.PhoneNumber && cd.InfoContent == location);
+
+                 // Update the report with the calculated data
+                 report.ContactCount = contactCount;
+                 report.PhoneNumberCount = phoneNumberCount;
+
+                 context.SaveChanges();
+             }
+
+                Thread.Sleep(5000);
         }
+
     }
 }

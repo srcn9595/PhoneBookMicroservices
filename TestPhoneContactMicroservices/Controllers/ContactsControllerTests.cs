@@ -100,11 +100,14 @@ public class ContactsControllerTests
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<Contact>>(result);
-        var contact = Assert.IsType<Contact>(actionResult.Value);
+        var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(actionResult.Result);
+        var contact = Assert.IsType<Contact>(createdAtActionResult.Value);
         Assert.Equal(newContact.Name, contact.Name);
         Assert.Equal(newContact.Surname, contact.Surname);
         Assert.Equal(newContact.Company, contact.Company);
     }
+
+
     [Fact]
     public async Task UpdateContact_UpdatesContact()
     {
