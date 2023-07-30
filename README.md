@@ -8,19 +8,19 @@ Bu projeyi çalıştırmak için öncelikle bilgisayarınızda .NET Core'un kuru
 
 1. Projeyi klonlayın veya indirin:
 
-    git clone https://github.com/srcn9595/PhoneBookMicroservices.git
+        git clone https://github.com/srcn9595/PhoneBookMicroservices.git
 
 2. Proje dizinine gidin:
 
-    cd PhoneBookMicroservices
+        cd PhoneBookMicroservices
 
 3. Projeyi build edin:
 
-    dotnet build
+        dotnet build
 
 4. Projeyi çalıştırın:
 
-    dotnet run
+        dotnet run
 
 
 ## Kullanım
