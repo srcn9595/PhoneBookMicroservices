@@ -8,11 +8,10 @@ namespace PhoneBookMicroservices
     {
         DbSet<Contact> Contacts { get; set; }
         DbSet<ContactDetail> ContactDetails { get; set; }
-        DbSet<Report> Reports { get; set; }
+        DbSet<Report> Reports { get; set; } 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<T> Update<T>(T entity) where T : class;
-
     }
 
 
@@ -25,7 +24,8 @@ namespace PhoneBookMicroservices
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactDetail> ContactDetails { get; set; }
-        public DbSet<Report> Reports { get; set; }
+        public virtual DbSet<Report> Reports { get; set; } // Add 'virtual' here
+
         public void Update<T>(T entity) where T : class
         {
             base.Update(entity);

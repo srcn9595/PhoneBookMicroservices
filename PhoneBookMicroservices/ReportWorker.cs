@@ -1,4 +1,5 @@
-﻿using PhoneBookMicroservices.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PhoneBookMicroservices.Models;
 using PhoneBookMicroservices.Services;
 
 namespace PhoneBookMicroservices
@@ -6,24 +7,22 @@ namespace PhoneBookMicroservices
     public class ReportWorker : IHostedService
     {
         private readonly IMessageQueueService _messageQueueService;
-        private readonly ContactDirectoryContext _context;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public ReportWorker(IMessageQueueService messageQueueService, ContactDirectoryContext context)
+        public ReportWorker(IMessageQueueService messageQueueService, IServiceScopeFactory serviceScopeFactory)
         {
             _messageQueueService = messageQueueService;
-            _context = context;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            
             Task.Run(Start);
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-      
             return Task.CompletedTask;
         }
 
@@ -39,22 +38,25 @@ namespace PhoneBookMicroservices
                     // Process the report (this is just a placeholder, replace with your actual report processing logic)
                     ProcessReport(reportId);
 
-                    // Update the report status to "Completed"
-                    var report = _context.Reports.Find(reportId);
-                    report.Status = ReportStatus.Completed;
-                    _context.SaveChanges();
+                    using (var scope = _serviceScopeFactory.CreateScope())
+                    {
+                        var context = scope.ServiceProvider.GetRequiredService<ContactDirectoryContext>();
+
+                        // Update the report status to "Completed"
+                        var report = context.Reports.Find(reportId);
+                        report.Status = ReportStatus.Completed;
+                        context.SaveChanges();
+                    }
                 }
 
                 // Wait a bit before checking the queue again
                 Thread.Sleep(1000);
             }
         }
+
         private void ProcessReport(Guid reportId)
         {
-
             Thread.Sleep(5000);
         }
     }
-
-
 }

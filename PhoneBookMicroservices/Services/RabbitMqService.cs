@@ -35,6 +35,12 @@ namespace PhoneBookMicroservices.Services
 
         public string ReceiveMessage(string queueName)
         {
+            _channel.QueueDeclare(queue: queueName,
+                                 durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
+
             var consumer = new EventingBasicConsumer(_channel);
             string messageContent = null;
 
@@ -50,5 +56,6 @@ namespace PhoneBookMicroservices.Services
 
             return messageContent;
         }
+
     }
 }
