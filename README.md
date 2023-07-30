@@ -39,4 +39,20 @@ Proje, aşağıdaki endpointlere sahiptir:
 
 Her bir endpoint için gerekli parametreler ve dönen yanıtlar hakkında daha fazla bilgi için API belgelendirmesine bakınız.
 
+Veritabanı olarak Postgre SQL kullanımı:
+Bu projede, veritabanı olarak Postgre SQL kullanılmaktadır. Postgre SQL, güçlü ve açık kaynaklı bir ilişkisel veritabanı yönetim sistemidir. Proje, verilerin depolanması ve yönetilmesi için Postgre SQL veritabanı ile etkileşim kurmaktadır.
+
+Veritabanı bağlantı ayarları:
+Projeyi çalıştırmadan önce, Postgre SQL veritabanınızı kurduğunuzdan emin olun ve bağlantı ayarlarınızı doğru şekilde yapılandırın. Veritabanı bağlantı ayarları, `appsettings.json` dosyasında yapılandırılmaktadır. Lütfen aşağıdaki alanları kendi veritabanı bilgilerinizle güncelleyin:
+
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "Server=<server_adresi>;Database=<veritabanı_adi>;User Id=<kullanici_adi>;Password=<parola>;"
+}
+
+Veritabanınızı oluşturmak için migration işlemini gerçekleştirmeyi unutmayın. Aşağıdaki komutları proje dizininde çalıştırarak migration işlemini yapabilirsiniz:
+
+dotnet ef migrations add InitialMigration
+dotnet ef database update
+
 
