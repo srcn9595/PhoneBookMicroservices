@@ -1,0 +1,1398 @@
+{
+  "PhoneBookMicroservices.dll": {
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Program.cs": {
+      "Program": {
+        "System.Void Program::<Main>$(System.String[])": {
+          "Lines": {
+            "5": 0,
+            "8": 0,
+            "9": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "15": 0,
+            "18": 0,
+            "19": 0,
+            "21": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "30": 0,
+            "32": 0,
+            "34": 0,
+            "36": 0
+          },
+          "Branches": [
+            {
+              "Line": 24,
+              "Offset": 177,
+              "EndOffset": 179,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 177,
+              "EndOffset": 197,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\ContactDirectoryContext.cs": {
+      "PhoneBookMicroservices.ContactDirectoryContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<PhoneBookMicroservices.Models.Contact> PhoneBookMicroservices.ContactDirectoryContext::get_Contacts()": {
+          "Lines": {
+            "28": 6
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PhoneBookMicroservices.Models.ContactDetail> PhoneBookMicroservices.ContactDirectoryContext::get_ContactDetails()": {
+          "Lines": {
+            "29": 6
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<PhoneBookMicroservices.Models.Report> PhoneBookMicroservices.ContactDirectoryContext::get_Reports()": {
+          "Lines": {
+            "30": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.ContactDirectoryContext::Update(T)": {
+          "Lines": {
+            "33": 0,
+            "34": 0,
+            "35": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.ContactDirectoryContext::SaveChanges()": {
+          "Lines": {
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Threading.Tasks.Task`1<System.Int32> PhoneBookMicroservices.ContactDirectoryContext::SaveChangesAsync(System.Threading.CancellationToken)": {
+          "Lines": {
+            "38": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean PhoneBookMicroservices.ContactDirectoryContext::ContactDetailExists(System.Guid)": {
+          "Lines": {
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.ContactDirectoryContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions`1<PhoneBookMicroservices.ContactDirectoryContext>)": {
+          "Lines": {
+            "24": 6,
+            "25": 6,
+            "26": 6
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\ReportWorker.cs": {
+      "PhoneBookMicroservices.ReportWorker": {
+        "System.Threading.Tasks.Task PhoneBookMicroservices.ReportWorker::StartAsync(System.Threading.CancellationToken)": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        },
+        "System.Threading.Tasks.Task PhoneBookMicroservices.ReportWorker::StopAsync(System.Threading.CancellationToken)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.ReportWorker::Start()": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "39": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": [
+            {
+              "Line": 34,
+              "Offset": 30,
+              "EndOffset": 32,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 30,
+              "EndOffset": 135,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void PhoneBookMicroservices.ReportWorker::ProcessReport(System.Guid)": {
+          "Lines": {
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "64": 0,
+            "67": 0,
+            "70": 0,
+            "73": 0,
+            "76": 0,
+            "77": 0,
+            "79": 0,
+            "80": 0,
+            "82": 0,
+            "83": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.ReportWorker::.ctor(PhoneBookMicroservices.Services.IMessageQueueService,Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)": {
+          "Lines": {
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Services\\MessageQueueService.cs": {
+      "PhoneBookMicroservices.Services.MessageQueueService": {
+        "System.Void PhoneBookMicroservices.Services.MessageQueueService::SendMessageToQueue(System.String,System.String)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Services.MessageQueueService::ReceiveMessageFromQueue(System.String)": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Services.MessageQueueService::.ctor(PhoneBookMicroservices.Services.RabbitMqService)": {
+          "Lines": {
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Services\\RabbitMqService.cs": {
+      "PhoneBookMicroservices.Services.RabbitMqService": {
+        "System.Void PhoneBookMicroservices.Services.RabbitMqService::SendMessage(System.String,System.String)": {
+          "Lines": {
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Services.RabbitMqService::ReceiveMessage(System.String)": {
+          "Lines": {
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "44": 0,
+            "45": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "57": 0,
+            "58": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Services.RabbitMqService::.ctor()": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Models\\Contact.cs": {
+      "PhoneBookMicroservices.Models.Contact": {
+        "System.Guid PhoneBookMicroservices.Models.Contact::get_Id()": {
+          "Lines": {
+            "7": 33
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Models.Contact::get_Name()": {
+          "Lines": {
+            "10": 1
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Models.Contact::set_Name(System.String)": {
+          "Lines": {
+            "12": 17,
+            "13": 17,
+            "14": 1,
+            "15": 1,
+            "17": 16,
+            "18": 16
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 13,
+              "Offset": 9,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 16
+            }
+          ]
+        },
+        "System.String PhoneBookMicroservices.Models.Contact::get_Surname()": {
+          "Lines": {
+            "21": 17
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Models.Contact::get_Company()": {
+          "Lines": {
+            "22": 17
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Models\\ContactDetail.cs": {
+      "PhoneBookMicroservices.Models.ContactDetail": {
+        "System.Guid PhoneBookMicroservices.Models.ContactDetail::get_Id()": {
+          "Lines": {
+            "7": 19
+          },
+          "Branches": []
+        },
+        "System.Guid PhoneBookMicroservices.Models.ContactDetail::get_ContactId()": {
+          "Lines": {
+            "8": 30
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.Models.ContactDetail::get_InfoTypeValue()": {
+          "Lines": {
+            "9": 30
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Models.ContactDetail::get_InfoContent()": {
+          "Lines": {
+            "10": 28
+          },
+          "Branches": []
+        },
+        "PhoneBookMicroservices.Models.InfoType PhoneBookMicroservices.Models.ContactDetail::get_InfoType()": {
+          "Lines": {
+            "15": 3
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Models.ContactDetail::set_InfoType(PhoneBookMicroservices.Models.InfoType)": {
+          "Lines": {
+            "16": 3
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Models\\Report.cs": {
+      "PhoneBookMicroservices.Models.Report": {
+        "System.Guid PhoneBookMicroservices.Models.Report::get_Id()": {
+          "Lines": {
+            "5": 7
+          },
+          "Branches": []
+        },
+        "System.DateTime PhoneBookMicroservices.Models.Report::get_RequestedAt()": {
+          "Lines": {
+            "6": 7
+          },
+          "Branches": []
+        },
+        "PhoneBookMicroservices.Models.ReportStatus PhoneBookMicroservices.Models.Report::get_Status()": {
+          "Lines": {
+            "7": 7
+          },
+          "Branches": []
+        },
+        "System.String PhoneBookMicroservices.Models.Report::get_Location()": {
+          "Lines": {
+            "8": 2
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.Models.Report::get_NumberOfContacts()": {
+          "Lines": {
+            "9": 2
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.Models.Report::get_NumberOfPhoneNumbers()": {
+          "Lines": {
+            "10": 2
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.Models.Report::get_ContactCount()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 PhoneBookMicroservices.Models.Report::get_PhoneNumberCount()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Migrations\\20230729151017_InitialCreate.cs": {
+      "PhoneBookMicroservices.Migrations.InitialCreate": {
+        "System.Void PhoneBookMicroservices.Migrations.InitialCreate::Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Migrations.InitialCreate::Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)": {
+          "Lines": {
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "65": 0,
+            "66": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Migrations\\20230729151017_InitialCreate.Designer.cs": {
+      "PhoneBookMicroservices.Migrations.InitialCreate": {
+        "System.Void PhoneBookMicroservices.Migrations.InitialCreate::BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "99": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Migrations\\ContactDirectoryContextModelSnapshot.cs": {
+      "PhoneBookMicroservices.Migrations.ContactDirectoryContextModelSnapshot": {
+        "System.Void PhoneBookMicroservices.Migrations.ContactDirectoryContextModelSnapshot::BuildModel(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "17": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "23": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "96": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Controllers\\ContactDetailsController.cs": {
+      "PhoneBookMicroservices.Controllers.ContactDetailsController": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactDetailsController::.ctor(PhoneBookMicroservices.IContactDirectoryContext,PhoneBookMicroservices.Services.IMessageQueueService)": {
+          "Lines": {
+            "19": 13,
+            "20": 13,
+            "21": 13,
+            "22": 13,
+            "23": 13
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactDetailsController/<CreateContactDetail>d__4": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactDetailsController/<CreateContactDetail>d__4::MoveNext()": {
+          "Lines": {
+            "45": 3,
+            "46": 3,
+            "47": 1,
+            "48": 1,
+            "51": 2,
+            "52": 2,
+            "55": 2,
+            "57": 2,
+            "58": 3
+          },
+          "Branches": [
+            {
+              "Line": 46,
+              "Offset": 42,
+              "EndOffset": 44,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 46,
+              "Offset": 42,
+              "EndOffset": 67,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactDetailsController/<DeleteContactDetail>d__6": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactDetailsController/<DeleteContactDetail>d__6::MoveNext()": {
+          "Lines": {
+            "102": 4,
+            "103": 4,
+            "105": 4,
+            "106": 1,
+            "107": 1,
+            "110": 3,
+            "111": 1,
+            "112": 1,
+            "116": 2,
+            "117": 2,
+            "118": 2,
+            "121": 2,
+            "123": 2,
+            "125": 0,
+            "126": 0,
+            "128": 0,
+            "130": 4
+          },
+          "Branches": [
+            {
+              "Line": 105,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 105,
+              "Offset": 198,
+              "EndOffset": 218,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            },
+            {
+              "Line": 110,
+              "Offset": 244,
+              "EndOffset": 246,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 110,
+              "Offset": 244,
+              "EndOffset": 269,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactDetailsController/<GetContactDetails>d__3": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactDetailsController/<GetContactDetails>d__3::MoveNext()": {
+          "Lines": {
+            "29": 2,
+            "30": 2,
+            "31": 2,
+            "32": 2,
+            "34": 2,
+            "35": 1,
+            "36": 1,
+            "39": 1,
+            "40": 2
+          },
+          "Branches": [
+            {
+              "Line": 34,
+              "Offset": 329,
+              "EndOffset": 331,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 34,
+              "Offset": 329,
+              "EndOffset": 351,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactDetailsController/<UpdateContactDetail>d__5": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactDetailsController/<UpdateContactDetail>d__5::MoveNext()": {
+          "Lines": {
+            "63": 4,
+            "64": 4,
+            "65": 1,
+            "66": 1,
+            "69": 3,
+            "70": 3,
+            "71": 1,
+            "72": 1,
+            "75": 2,
+            "76": 2,
+            "79": 2,
+            "80": 2,
+            "81": 2,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "89": 0,
+            "90": 0,
+            "94": 2,
+            "95": 4
+          },
+          "Branches": [
+            {
+              "Line": 64,
+              "Offset": 35,
+              "EndOffset": 37,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4
+            },
+            {
+              "Line": 64,
+              "Offset": 59,
+              "EndOffset": 61,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 4
+            },
+            {
+              "Line": 64,
+              "Offset": 35,
+              "EndOffset": 85,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 59,
+              "EndOffset": 85,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 88,
+              "EndOffset": 90,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 88,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 3
+            },
+            {
+              "Line": 70,
+              "Offset": 281,
+              "EndOffset": 283,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1
+            },
+            {
+              "Line": 70,
+              "Offset": 281,
+              "EndOffset": 301,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2
+            },
+            {
+              "Line": 84,
+              "Offset": 511,
+              "EndOffset": 513,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 511,
+              "EndOffset": 528,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Controllers\\ContactsController.cs": {
+      "PhoneBookMicroservices.Controllers.ContactsController": {
+        "System.Boolean PhoneBookMicroservices.Controllers.ContactsController::ContactExists(System.Guid)": {
+          "Lines": {
+            "135": 2,
+            "136": 2,
+            "137": 2
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController::.ctor(PhoneBookMicroservices.IContactDirectoryContext,PhoneBookMicroservices.Services.IMessageQueueService)": {
+          "Lines": {
+            "16": 13,
+            "17": 13,
+            "18": 13,
+            "19": 13,
+            "20": 13
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactsController/<CreateContact>d__5": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController/<CreateContact>d__5::MoveNext()": {
+          "Lines": {
+            "44": 3,
+            "45": 3,
+            "46": 1,
+            "47": 1,
+            "50": 2,
+            "52": 2,
+            "53": 2,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "60": 1,
+            "62": 1,
+            "63": 3
+          },
+          "Branches": [
+            {
+              "Line": 45,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 45,
+              "Offset": 26,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactsController/<DeleteContact>d__7": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController/<DeleteContact>d__7::MoveNext()": {
+          "Lines": {
+            "112": 3,
+            "113": 3,
+            "114": 3,
+            "115": 1,
+            "116": 1,
+            "119": 2,
+            "121": 2,
+            "122": 2,
+            "123": 1,
+            "124": 1,
+            "125": 1,
+            "126": 1,
+            "129": 1,
+            "131": 1,
+            "132": 3
+          },
+          "Branches": [
+            {
+              "Line": 114,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 114,
+              "Offset": 198,
+              "EndOffset": 218,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactsController/<GetContact>d__4": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController/<GetContact>d__4::MoveNext()": {
+          "Lines": {
+            "32": 2,
+            "33": 2,
+            "34": 2,
+            "35": 1,
+            "36": 1,
+            "38": 1,
+            "39": 2
+          },
+          "Branches": [
+            {
+              "Line": 34,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 34,
+              "Offset": 187,
+              "EndOffset": 209,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactsController/<GetContacts>d__3": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController/<GetContacts>d__3::MoveNext()": {
+          "Lines": {
+            "25": 1,
+            "26": 1,
+            "27": 1
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ContactsController/<UpdateContact>d__6": {
+        "System.Void PhoneBookMicroservices.Controllers.ContactsController/<UpdateContact>d__6::MoveNext()": {
+          "Lines": {
+            "68": 2,
+            "69": 2,
+            "70": 0,
+            "71": 0,
+            "74": 2,
+            "75": 2,
+            "76": 1,
+            "77": 1,
+            "81": 1,
+            "82": 1,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "92": 0,
+            "93": 0,
+            "96": 1,
+            "97": 1,
+            "98": 1,
+            "101": 0,
+            "103": 0,
+            "104": 2
+          },
+          "Branches": [
+            {
+              "Line": 69,
+              "Offset": 35,
+              "EndOffset": 37,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 69,
+              "Offset": 35,
+              "EndOffset": 61,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 69,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 69,
+              "Offset": 64,
+              "EndOffset": 84,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            },
+            {
+              "Line": 75,
+              "Offset": 257,
+              "EndOffset": 259,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 75,
+              "Offset": 257,
+              "EndOffset": 277,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 87,
+              "Offset": 475,
+              "EndOffset": 477,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 87,
+              "Offset": 475,
+              "EndOffset": 495,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Controllers\\RabbitMqController.cs": {
+      "PhoneBookMicroservices.Controllers.RabbitMqController": {
+        "Microsoft.AspNetCore.Mvc.IActionResult PhoneBookMicroservices.Controllers.RabbitMqController::SendMessage()": {
+          "Lines": {
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "21": 1
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult PhoneBookMicroservices.Controllers.RabbitMqController::ReceiveMessage()": {
+          "Lines": {
+            "24": 3,
+            "25": 3,
+            "26": 3,
+            "27": 1,
+            "28": 1,
+            "31": 2,
+            "32": 3
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 26,
+              "Offset": 26,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void PhoneBookMicroservices.Controllers.RabbitMqController::.ctor(PhoneBookMicroservices.Services.IMessageQueueService)": {
+          "Lines": {
+            "12": 4,
+            "13": 4,
+            "14": 4,
+            "15": 4
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\Sercan\\OneDrive\\Masaüstü\\Git-private\\PhoneBookMicroservices\\PhoneBookMicroservices\\Controllers\\ReportsController.cs": {
+      "PhoneBookMicroservices.Controllers.ReportsController": {
+        "Microsoft.AspNetCore.Mvc.ActionResult`1<System.Guid> PhoneBookMicroservices.Controllers.ReportsController::RequestReport()": {
+          "Lines": {
+            "113": 1,
+            "114": 1,
+            "117": 1,
+            "118": 1,
+            "119": 1,
+            "120": 1,
+            "121": 1,
+            "122": 1,
+            "123": 1,
+            "124": 1,
+            "127": 1,
+            "130": 1,
+            "131": 1
+          },
+          "Branches": []
+        },
+        "System.Boolean PhoneBookMicroservices.Controllers.ReportsController::ReportExists(System.Guid)": {
+          "Lines": {
+            "134": 0,
+            "135": 0,
+            "136": 0
+          },
+          "Branches": []
+        },
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController::.ctor(PhoneBookMicroservices.ContactDirectoryContext,PhoneBookMicroservices.Services.IMessageQueueService)": {
+          "Lines": {
+            "19": 6,
+            "20": 6,
+            "21": 6,
+            "22": 6,
+            "23": 6
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ReportsController/<CreateReport>d__5": {
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController/<CreateReport>d__5::MoveNext()": {
+          "Lines": {
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ReportsController/<DeleteReport>d__7": {
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController/<DeleteReport>d__7::MoveNext()": {
+          "Lines": {
+            "96": 0,
+            "97": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "104": 0,
+            "105": 0,
+            "107": 0,
+            "108": 0
+          },
+          "Branches": [
+            {
+              "Line": 99,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 99,
+              "Offset": 198,
+              "EndOffset": 218,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ReportsController/<GetReport>d__4": {
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController/<GetReport>d__4::MoveNext()": {
+          "Lines": {
+            "35": 2,
+            "36": 2,
+            "38": 2,
+            "39": 1,
+            "40": 1,
+            "43": 1,
+            "44": 2
+          },
+          "Branches": [
+            {
+              "Line": 38,
+              "Offset": 187,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 38,
+              "Offset": 187,
+              "EndOffset": 209,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ReportsController/<GetReports>d__3": {
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController/<GetReports>d__3::MoveNext()": {
+          "Lines": {
+            "28": 1,
+            "29": 1,
+            "30": 1
+          },
+          "Branches": []
+        }
+      },
+      "PhoneBookMicroservices.Controllers.ReportsController/<UpdateReport>d__6": {
+        "System.Void PhoneBookMicroservices.Controllers.ReportsController/<UpdateReport>d__6::MoveNext()": {
+          "Lines": {
+            "59": 2,
+            "60": 2,
+            "61": 2,
+            "62": 1,
+            "63": 1,
+            "66": 1,
+            "67": 1,
+            "68": 1,
+            "71": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "84": 0,
+            "85": 0,
+            "89": 0,
+            "90": 2
+          },
+          "Branches": [
+            {
+              "Line": 61,
+              "Offset": 198,
+              "EndOffset": 200,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 61,
+              "Offset": 198,
+              "EndOffset": 218,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 66,
+              "Offset": 244,
+              "EndOffset": 246,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 66,
+              "Offset": 244,
+              "EndOffset": 264,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 79,
+              "Offset": 452,
+              "EndOffset": 454,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 79,
+              "Offset": 452,
+              "EndOffset": 469,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}
