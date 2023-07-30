@@ -4,7 +4,7 @@ Bu proje, bir telefon rehberi uygulamasının microservices mimarisi ile gelişt
 
 ## Kurulum
 
-Bu projeyi çalıştırmak için öncelikle bilgisayarınızda .NET Core'un kurulu olması gerekmektedir. Ayrıca, projenin veritabanı olarak Postgres veya MongoDB kullanmaktadır, bu yüzden bu veritabanlarından birinin kurulu olması gerekmektedir.
+Bu projeyi çalıştırmak için öncelikle bilgisayarınızda .NET Core'un kurulu olması gerekmektedir. Ayrıca, projenin veritabanı olarak Postgres  kullanmaktadır, bu yüzden bu veritabanlarından  kurulu olması gerekmektedir.
 
 1. Projeyi klonlayın veya indirin:
 
@@ -56,4 +56,17 @@ Veritabanınızı oluşturmak için migration işlemini gerçekleştirmeyi unutm
   
   dotnet ef database update
 
+RabbitMQ Kullanımı:
+Bu projede, asenkron mesajlaşma için RabbitMQ kullanılmaktadır. RabbitMQ, dağıtık sistemler arasında mesajlar aracılığıyla iletişim kurmayı sağlayan bir mesaj sıralama yazılımıdır. Proje, rapor taleplerinin asenkron olarak işlenmesi için RabbitMQ'yu kullanmaktadır.
 
+RabbitMQ Ayarları:
+Projeyi çalıştırmadan önce, RabbitMQ brokerınızı kurduğunuzdan emin olun ve bağlantı ayarlarınızı doğru şekilde yapılandırın. RabbitMQ bağlantı ayarları, `appsettings.json` dosyasında yapılandırılmaktadır. Lütfen aşağıdaki alanları kendi RabbitMQ bilgilerinizle güncelleyin:
+
+```json
+"RabbitMQ": {
+    "HostName": "<rabbitmq_server_adresi>",
+    "UserName": "<kullanici_adi>",
+    "Password": "<parola>"
+}
+```
+Rapor taleplerinin asenkron olarak işlenmesi için mesaj kuyruğu (queue) ve mesaj değişim (exchange) yapılandırmalarınızı da doğru şekilde yapmanız gerekebilir. Bu yapılandırmaları projenize ve kullanım senaryonuza göre uygun bir şekilde ayarlayabilirsiniz.
