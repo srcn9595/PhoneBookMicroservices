@@ -49,7 +49,7 @@ Projeyi çalıştırmadan önce, Postgre SQL veritabanınızı kurduğunuzdan em
 "ConnectionStrings": {
     "DefaultConnection": "Server=<server_adresi>;Database=<veritabanı_adi>;User Id=<kullanici_adi>;Password=<parola>;"
 }
-
+```
 Veritabanınızı oluşturmak için migration işlemini gerçekleştirmeyi unutmayın. Aşağıdaki komutları proje dizininde çalıştırarak migration işlemini yapabilirsiniz:
 
 dotnet ef migrations add InitialMigration
