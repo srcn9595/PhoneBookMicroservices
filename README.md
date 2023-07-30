@@ -8,19 +8,19 @@ Bu projeyi çalıştırmak için öncelikle bilgisayarınızda .NET Core'un kuru
 
 1. Projeyi klonlayın veya indirin:
 
-  git clone https://github.com/srcn9595/PhoneBookMicroservices.git
+    git clone https://github.com/srcn9595/PhoneBookMicroservices.git
 
 2. Proje dizinine gidin:
 
-  cd PhoneBookMicroservices
+    cd PhoneBookMicroservices
 
 3. Projeyi build edin:
 
-  dotnet build
+    dotnet build
 
 4. Projeyi çalıştırın:
 
-  dotnet run
+    dotnet run
 
 
 ## Kullanım
@@ -52,15 +52,15 @@ Projeyi çalıştırmadan önce, Postgre SQL veritabanınızı kurduğunuzdan em
 ```
 Veritabanınızı oluşturmak için migration işlemini gerçekleştirmeyi unutmayın. Aşağıdaki komutları proje dizininde çalıştırarak migration işlemini yapabilirsiniz:
 
-  dotnet ef migrations add InitialMigration
+    dotnet ef migrations add InitialMigration
   
-  dotnet ef database update
+    dotnet ef database update
 
 RabbitMQ Kullanımı:
-Bu projede, asenkron mesajlaşma için RabbitMQ kullanılmaktadır. RabbitMQ, dağıtık sistemler arasında mesajlar aracılığıyla iletişim kurmayı sağlayan bir mesaj sıralama yazılımıdır. Proje, rapor taleplerinin asenkron olarak işlenmesi için RabbitMQ'yu kullanmaktadır.
+  Bu projede, asenkron mesajlaşma için RabbitMQ kullanılmaktadır. RabbitMQ, dağıtık sistemler arasında mesajlar aracılığıyla iletişim kurmayı sağlayan bir mesaj sıralama yazılımıdır. Proje, rapor taleplerinin asenkron olarak işlenmesi için RabbitMQ'yu kullanmaktadır.
 
 RabbitMQ Ayarları:
-Projeyi çalıştırmadan önce, RabbitMQ brokerınızı kurduğunuzdan emin olun ve bağlantı ayarlarınızı doğru şekilde yapılandırın. RabbitMQ bağlantı ayarları, `appsettings.json` dosyasında yapılandırılmaktadır. Lütfen aşağıdaki alanları kendi RabbitMQ bilgilerinizle güncelleyin:
+  Projeyi çalıştırmadan önce, RabbitMQ brokerınızı kurduğunuzdan emin olun ve bağlantı ayarlarınızı doğru şekilde yapılandırın. RabbitMQ bağlantı ayarları, `appsettings.json` dosyasında yapılandırılmaktadır. Lütfen aşağıdaki alanları kendi RabbitMQ bilgilerinizle güncelleyin:
 
 ```json
 "RabbitMQ": {
@@ -69,4 +69,4 @@ Projeyi çalıştırmadan önce, RabbitMQ brokerınızı kurduğunuzdan emin olu
     "Password": "<parola>"
 }
 ```
-Rapor taleplerinin asenkron olarak işlenmesi için mesaj kuyruğu (queue) ve mesaj değişim (exchange) yapılandırmalarınızı da doğru şekilde yapmanız gerekebilir. Bu yapılandırmaları projenize ve kullanım senaryonuza göre uygun bir şekilde ayarlayabilirsiniz.
+  Rapor taleplerinin asenkron olarak işlenmesi için mesaj kuyruğu (queue) ve mesaj değişim (exchange) yapılandırmalarınızı da doğru şekilde yapmanız gerekebilir. Bu yapılandırmaları projenize ve kullanım senaryonuza göre uygun bir şekilde ayarlayabilirsiniz.
