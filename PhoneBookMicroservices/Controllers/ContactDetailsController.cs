@@ -13,14 +13,15 @@ namespace PhoneBookMicroservices.Controllers
     [ApiController]
     public class ContactDetailsController : ControllerBase
     {
-        private readonly ContactDirectoryContext _context;
+        private readonly IContactDirectoryContext _context;
         private readonly IMessageQueueService _messageQueueService;
 
-        public ContactDetailsController(ContactDirectoryContext context, IMessageQueueService messageQueueService)
+        public ContactDetailsController(IContactDirectoryContext context, IMessageQueueService messageQueueService)
         {
             _context = context;
             _messageQueueService = messageQueueService;
         }
+
 
         // GET: api/contactdetails/{contactId}
         [HttpGet("{contactId}")]
@@ -60,12 +61,19 @@ namespace PhoneBookMicroservices.Controllers
         [HttpPut("{contactId}/{id}")]
         public async Task<IActionResult> UpdateContactDetail(Guid contactId, Guid id, ContactDetail contactDetail)
         {
-            if (id != contactDetail.Id || contactId != contactDetail.ContactId)
+            if (contactDetail == null || id != contactDetail.Id || contactId != contactDetail.ContactId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(contactDetail).State = EntityState.Modified;
+            var existingContactDetail = await _context.ContactDetails.FindAsync(id);
+            if (existingContactDetail == null)
+            {
+                return NotFound();
+            }
+
+            existingContactDetail.InfoContent = contactDetail.InfoContent;
+            existingContactDetail.InfoTypeValue = contactDetail.InfoTypeValue;
 
             try
             {
@@ -73,7 +81,7 @@ namespace PhoneBookMicroservices.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContactDetailExists(id))
+                if (!_context.ContactDetailExists(id))
                 {
                     return NotFound();
                 }
@@ -86,31 +94,40 @@ namespace PhoneBookMicroservices.Controllers
             return NoContent();
         }
 
+
+
         // DELETE: api/contactdetails/{contactId}/{id}
         [HttpDelete("{contactId}/{id}")]
         public async Task<IActionResult> DeleteContactDetail(Guid contactId, Guid id)
         {
-            var contactDetail = await _context.ContactDetails
-                .Where(cd => cd.ContactId == contactId && cd.Id == id)
-                .FirstOrDefaultAsync();
+            var contactDetail = await _context.ContactDetails.FindAsync(id);
 
             if (contactDetail == null)
             {
                 return NotFound();
             }
 
-            _context.ContactDetails.Remove(contactDetail);
-            await _context.SaveChangesAsync();
+            if (contactDetail.ContactId != contactId)
+            {
+                return BadRequest("ContactId and id do not match.");
+            }
 
-            // Send a message to RabbitMQ
-            _messageQueueService.SendMessageToQueue("contactDetailsQueue", $"Contact detail deleted: {contactDetail.Id}");
+            try
+            {
+                _context.ContactDetails.Remove(contactDetail);
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                // Send a message to RabbitMQ
+                _messageQueueService.SendMessageToQueue("contactDetailsQueue", $"Contact detail deleted: {contactDetail.Id}");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during the delete operation
+                return StatusCode(500, "An error occurred while deleting the contact detail.");
+            }
         }
 
-        private bool ContactDetailExists(Guid id)
-        {
-            return _context.ContactDetails.Any(e => e.Id == id);
-        }
     }
 }

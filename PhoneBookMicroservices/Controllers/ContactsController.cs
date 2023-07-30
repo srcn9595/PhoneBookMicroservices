@@ -42,8 +42,20 @@ namespace PhoneBookMicroservices.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> CreateContact(Contact contact)
         {
+            if (contact == null)
+            {
+                return BadRequest();
+            }
+
             _context.Contacts.Add(contact);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
             _messageQueueService.SendMessageToQueue("ContactCreated", $"Contact with ID {contact.Id} has been created.");
 
@@ -54,14 +66,20 @@ namespace PhoneBookMicroservices.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact(Guid id, Contact contact)
         {
-            if (id != contact.Id)
+            if (contact == null || id != contact.Id)
             {
                 return BadRequest();
             }
 
-            _context.Update(contact);
+            var existingContact = await _context.Contacts.FindAsync(id);
+            if (existingContact == null)
+            {
+                return NotFound();
+            }
+
             try
             {
+                _context.Entry(existingContact).CurrentValues.SetValues(contact);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -75,11 +93,18 @@ namespace PhoneBookMicroservices.Controllers
                     throw;
                 }
             }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
             _messageQueueService.SendMessageToQueue("ContactUpdated", $"Contact with ID {contact.Id} has been updated.");
 
             return NoContent();
         }
+
+
+
 
         // DELETE: api/contacts/{id}
         [HttpDelete("{id}")]
@@ -92,7 +117,14 @@ namespace PhoneBookMicroservices.Controllers
             }
 
             _context.Contacts.Remove(contact);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
             _messageQueueService.SendMessageToQueue("ContactDeleted", $"Contact with ID {contact.Id} has been deleted.");
 

@@ -23,6 +23,11 @@ namespace PhoneBookMicroservices.Controllers
         public IActionResult ReceiveMessage()
         {
             var message = _messageQueueService.ReceiveMessageFromQueue("testQueue");
+            if (string.IsNullOrEmpty(message))
+            {
+                return NotFound(); 
+            }
+
             return Ok($"Received message: {message}");
         }
     }

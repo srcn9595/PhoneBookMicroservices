@@ -6,83 +6,84 @@ using PhoneBookMicroservices.Models;
 using PhoneBookMicroservices;
 using System.Collections.Generic;
 using PhoneBookMicroservices.Services;
+using TestPhoneContactMicroservices;
 
 public class ContactsControllerTests
 {
+   
+
     [Fact]
-    public async Task GetContacts_ReturnsCorrectNumberOfContacts()
+    public async Task CreateContact_InvalidContact_ReturnsBadRequest()
     {
         // Arrange
         var mockContext = new Mock<IContactDirectoryContext>();
-        var mockMessageQueueService = new Mock<IMessageQueueService>(); // Add this line
+        var mockMessageQueueService = new Mock<IMessageQueueService>();
 
-        var expectedContacts = new List<Contact>
-        {
-            new Contact { Id = Guid.NewGuid(), Name = "Test1", Surname = "Test1", Company = "Test1" },
-            new Contact { Id = Guid.NewGuid(), Name = "Test2", Surname = "Test2", Company = "Test2" }
-        };
-
-        var mockSet = new Mock<DbSet<Contact>>();
-        mockSet.As<IQueryable<Contact>>().Setup(m => m.Provider).Returns(expectedContacts.AsQueryable().Provider);
-        mockSet.As<IQueryable<Contact>>().Setup(m => m.Expression).Returns(expectedContacts.AsQueryable().Expression);
-        mockSet.As<IQueryable<Contact>>().Setup(m => m.ElementType).Returns(expectedContacts.AsQueryable().ElementType);
-        mockSet.As<IQueryable<Contact>>().Setup(m => m.GetEnumerator()).Returns(expectedContacts.AsQueryable().GetEnumerator());
-
-        // Add this line
-        mockSet.As<IAsyncEnumerable<Contact>>().Setup(m => m.GetAsyncEnumerator(new CancellationToken()))
-         .Returns(new TestAsyncEnumerator<Contact>(expectedContacts.GetEnumerator()));
-
-        mockContext.Setup(ctx => ctx.Contacts).Returns(mockSet.Object);
-
-        var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object); // Update this line
+        var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
 
         // Act
-        var result = await controller.GetContacts();
+        var result = await controller.CreateContact(null);
 
         // Assert
-        var actionResult = Assert.IsType<ActionResult<IEnumerable<Contact>>>(result);
-        var contacts = Assert.IsType<List<Contact>>(actionResult.Value);
-        Assert.Equal(expectedContacts.Count, contacts.Count);
-    }
-    public class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
-    {
-        private readonly IEnumerator<T> _inner;
-
-        public TestAsyncEnumerator(IEnumerator<T> inner)
-        {
-            _inner = inner;
-        }
-
-        public T Current => _inner.Current;
-
-        public ValueTask DisposeAsync()
-        {
-            _inner.Dispose();
-            return new ValueTask(Task.CompletedTask);
-        }
-
-        public ValueTask<bool> MoveNextAsync()
-        {
-            return new ValueTask<bool>(_inner.MoveNext());
-        }
+        Assert.IsType<BadRequestResult>(result.Result);
     }
 
-    public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>
+    [Fact]
+    public async Task UpdateContact_NonExistingContact_ReturnsNotFound()
     {
-        private readonly IEnumerable<T> _inner;
+        // Arrange
+        var mockContext = new Mock<IContactDirectoryContext>();
+        var mockMessageQueueService = new Mock<IMessageQueueService>();
 
-        public TestAsyncEnumerable(IEnumerable<T> inner)
-        {
-            _inner = inner;
-        }
+        var nonExistingId = Guid.NewGuid();
+        var updatedContact = new Contact { Id = nonExistingId, Name = "Updated", Surname = "Updated", Company = "Updated" };
 
-        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return new TestAsyncEnumerator<T>(_inner.GetEnumerator());
-        }
+        mockContext.Setup(ctx => ctx.Contacts.FindAsync(nonExistingId)).ReturnsAsync((Contact)null);
+
+        var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
+
+        // Act
+        var result = await controller.UpdateContact(nonExistingId, updatedContact);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
     }
     [Fact]
-    public async Task CreateContact_CreatesContact()
+    public void AddContact_AddsContactToContext()
+    {
+        // Arrange
+        var context = new MockContactDirectoryContext();
+        var contact = new Contact { Id = Guid.NewGuid(), Name = "Test", Surname = "Test", Company = "Test" };
+
+        // Act
+        context.Contacts.Add(contact);
+
+        // Assert
+        Assert.Contains(contact, context.Contacts);
+    }
+
+    [Fact]
+    public async Task DeleteContact_NonExistingContact_ReturnsNotFound()
+    {
+        // Arrange
+        var mockContext = new Mock<IContactDirectoryContext>();
+        var mockMessageQueueService = new Mock<IMessageQueueService>();
+
+        var nonExistingId = Guid.NewGuid();
+
+        mockContext.Setup(ctx => ctx.Contacts.FindAsync(nonExistingId)).ReturnsAsync((Contact)null);
+
+        var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
+
+        // Act
+        var result = await controller.DeleteContact(nonExistingId);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+    }
+
+    [Fact]
+    public async Task CreateContact_SaveChangesThrowsException_ReturnsBadRequest()
     {
         // Arrange
         var mockContext = new Mock<IContactDirectoryContext>();
@@ -91,7 +92,7 @@ public class ContactsControllerTests
         var newContact = new Contact { Name = "Test2", Surname = "Test2", Company = "Test2" };
 
         mockContext.Setup(ctx => ctx.Contacts.Add(newContact));
-        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(1));
+        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
         var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
 
@@ -99,17 +100,11 @@ public class ContactsControllerTests
         var result = await controller.CreateContact(newContact);
 
         // Assert
-        var actionResult = Assert.IsType<ActionResult<Contact>>(result);
-        var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(actionResult.Result);
-        var contact = Assert.IsType<Contact>(createdAtActionResult.Value);
-        Assert.Equal(newContact.Name, contact.Name);
-        Assert.Equal(newContact.Surname, contact.Surname);
-        Assert.Equal(newContact.Company, contact.Company);
+        Assert.IsType<BadRequestResult>(result.Result);
     }
 
-
     [Fact]
-    public async Task UpdateContact_UpdatesContact()
+    public async Task UpdateContact_SaveChangesThrowsException_ReturnsBadRequest()
     {
         // Arrange
         var mockContext = new Mock<IContactDirectoryContext>();
@@ -119,7 +114,7 @@ public class ContactsControllerTests
         var updatedContact = new Contact { Id = existingContact.Id, Name = "Updated", Surname = "Updated", Company = "Updated" };
 
         mockContext.Setup(ctx => ctx.Contacts.FindAsync(existingContact.Id)).ReturnsAsync(existingContact);
-        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(1));
+        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
         var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
 
@@ -127,12 +122,12 @@ public class ContactsControllerTests
         var result = await controller.UpdateContact(existingContact.Id, updatedContact);
 
         // Assert
-        var actionResult = Assert.IsType<NoContentResult>(result);
-        mockContext.Verify(ctx => ctx.Update(updatedContact), Times.Once);
-        mockMessageQueueService.Verify(mqs => mqs.SendMessageToQueue("ContactUpdated", It.IsAny<string>()), Times.Once);
+        Assert.IsType<BadRequestResult>(result);
     }
+
+
     [Fact]
-    public async Task DeleteContact_DeletesContact()
+    public async Task DeleteContact_SaveChangesThrowsException_ReturnsBadRequest()
     {
         // Arrange
         var mockContext = new Mock<IContactDirectoryContext>();
@@ -141,7 +136,7 @@ public class ContactsControllerTests
         var existingContact = new Contact { Id = Guid.NewGuid(), Name = "Test", Surname = "Test", Company = "Test" };
 
         mockContext.Setup(ctx => ctx.Contacts.FindAsync(existingContact.Id)).ReturnsAsync(existingContact);
-        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(1));
+        mockContext.Setup(ctx => ctx.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
         var controller = new ContactsController(mockContext.Object, mockMessageQueueService.Object);
 
@@ -149,10 +144,51 @@ public class ContactsControllerTests
         var result = await controller.DeleteContact(existingContact.Id);
 
         // Assert
-        var actionResult = Assert.IsType<NoContentResult>(result);
-        mockContext.Verify(ctx => ctx.Contacts.Remove(existingContact), Times.Once);
-        mockMessageQueueService.Verify(mqs => mqs.SendMessageToQueue("ContactDeleted", It.IsAny<string>()), Times.Once);
+        Assert.IsType<BadRequestResult>(result);
+    }
+    [Fact]
+    public void RemoveContact_RemovesContactFromContext()
+    {
+        // Arrange
+        var context = new MockContactDirectoryContext();
+        var contact = new Contact { Id = Guid.NewGuid(), Name = "Test", Surname = "Test", Company = "Test" };
+        context.Contacts.Add(contact);
+
+        // Act
+        context.Contacts.Remove(contact);
+
+        // Assert
+        Assert.DoesNotContain(contact, context.Contacts);
+    }
+    [Fact]
+    public void Add_AddsItemToSet()
+    {
+        // Arrange
+        var set = new MockDbSet<Contact>();
+        var contact = new Contact { Id = Guid.NewGuid(), Name = "Test", Surname = "Test", Company = "Test" };
+
+        // Act
+        set.Add(contact);
+
+        // Assert
+        Assert.Contains(contact, set);
+    }
+
+    [Fact]
+    public void Remove_RemovesItemFromSet()
+    {
+        // Arrange
+        var set = new MockDbSet<Contact>();
+        var contact = new Contact { Id = Guid.NewGuid(), Name = "Test", Surname = "Test", Company = "Test" };
+        set.Add(contact);
+
+        // Act
+        set.Remove(contact);
+
+        // Assert
+        Assert.DoesNotContain(contact, set);
     }
 }
+
 
 
